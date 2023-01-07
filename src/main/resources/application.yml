@@ -1,0 +1,5 @@
+easy-es:
+  enable: true
+  address : 127.0.0.1:9200
+#  username: elastic
+#  password: WG7WVmuNMtM4GwNYkyWH
