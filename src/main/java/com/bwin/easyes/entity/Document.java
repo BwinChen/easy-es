@@ -1,10 +1,15 @@
 package com.bwin.easyes.entity;
 
 import lombok.Data;
+import org.dromara.easyes.annotation.IndexName;
+import org.dromara.easyes.annotation.Settings;
+import org.dromara.easyes.annotation.rely.RefreshPolicy;
 
 /**
  * @author McAfee
  */
+@IndexName(refreshPolicy = RefreshPolicy.WAIT_UNTIL)
+//@Settings(refreshInterval = "1ms")
 @Data
 public class Document {
     /**

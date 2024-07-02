@@ -1,7 +1,7 @@
 package com.bwin.easyes.mapper;
 
-import cn.easyes.core.conditions.interfaces.BaseEsMapper;
 import com.bwin.easyes.entity.Document;
+import org.dromara.easyes.core.kernel.BaseEsMapper;
 
 /**
  * @author McAfee

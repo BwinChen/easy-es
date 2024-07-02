@@ -1,9 +1,10 @@
 package com.bwin.easyes;
 
-import cn.easyes.core.conditions.LambdaEsQueryWrapper;
-import cn.easyes.core.conditions.LambdaEsUpdateWrapper;
 import com.bwin.easyes.entity.Document;
 import com.bwin.easyes.mapper.DocumentMapper;
+import org.dromara.easyes.core.conditions.select.LambdaEsQueryWrapper;
+import org.dromara.easyes.core.conditions.update.LambdaEsUpdateWrapper;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,8 +12,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class EasyEsApplicationTests {
+
     @Autowired
     private DocumentMapper documentMapper;
+
+    @Test
+    public void testCreateIndex() {
+        // 测试创建索引,框架会根据实体类及字段上加的自定义注解一键帮您生成索引 需确保索引托管模式处于manual手动挡(默认处于此模式),若为自动挡则会冲突
+        boolean success = documentMapper.createIndex();
+        Assertions.assertTrue(success);
+    }
 
     @Test
     void testInsert() {
@@ -36,15 +45,16 @@ class EasyEsApplicationTests {
     }
 
     @Test
-    void testUpdate() {
+    public void testUpdate() {
         // 测试更新 更新有两种情况 分别演示如下:
         // case1: 已知id, 根据id更新 (为了演示方便,此id是从上一步查询中复制过来的,实际业务可以自行查询)
-        String id = "tBEYY4UBSB8vEYsp-6iJ";
+        String id = "ZRKwcZABwNWJDuPOOrNi";
         String title1 = "隔壁老王";
         Document document1 = new Document();
         document1.setId(id);
         document1.setTitle(title1);
-        documentMapper.updateById(document1);
+        int successCount = documentMapper.updateById(document1);
+        System.out.println(successCount);
 
         // case2: id未知, 根据条件更新
         LambdaEsUpdateWrapper<Document> wrapper = new LambdaEsUpdateWrapper<>();
@@ -52,13 +62,14 @@ class EasyEsApplicationTests {
         Document document2 = new Document();
         document2.setTitle("隔壁老李");
         document2.setContent("推*技术过软");
-        documentMapper.update(document2,wrapper);
+        successCount = documentMapper.update(document2,wrapper);
+        System.out.println(successCount);
 
         // 关于case2 还有另一种省略实体的简单写法,这里不演示,后面章节有介绍,语法与MP一致
     }
 
     @Test
-    void testDelete() {
+    public void testDelete() {
         // 测试删除数据 删除有两种情况:根据id删或根据条件删
         // 鉴于根据id删过于简单,这里仅演示根据条件删,以老李的名义删,让老李心理平衡些
         LambdaEsQueryWrapper<Document> wrapper = new LambdaEsQueryWrapper<>();
