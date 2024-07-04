@@ -2,6 +2,7 @@ package com.bwin.easyes;
 
 import com.bwin.easyes.entity.Document;
 import com.bwin.easyes.mapper.DocumentMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.dromara.easyes.core.conditions.select.LambdaEsQueryWrapper;
 import org.dromara.easyes.core.conditions.update.LambdaEsUpdateWrapper;
 import org.junit.jupiter.api.Assertions;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Slf4j
 @SpringBootTest
 class EasyEsApplicationTests {
 
@@ -78,5 +80,4 @@ class EasyEsApplicationTests {
         int successCount = documentMapper.delete(wrapper);
         System.out.println(successCount);
     }
-
 }

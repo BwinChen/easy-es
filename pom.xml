@@ -17,6 +17,7 @@
         <java.version>17</java.version>
         <easy-es.version>2.0.0</easy-es.version>
         <elasticsearch.version>7.14.0</elasticsearch.version>
+        <fastjson.version>2.0.51</fastjson.version>
     </properties>
     <dependencies>
         <dependency>
@@ -32,6 +33,11 @@
             <groupId>org.elasticsearch.client</groupId>
             <artifactId>elasticsearch-rest-high-level-client</artifactId>
             <version>${elasticsearch.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+            <version>${fastjson.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -50,7 +56,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -67,5 +72,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
